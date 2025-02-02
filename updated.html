@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mum's Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .queen-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: #ff69b4;
+            margin-top: 20px;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        .hon-text {
+            font-family: 'Arial', sans-serif;
+            font-size: 2rem;
+            color: #ff69b4;
+            margin-left: 20px;
+            display: inline;
+        }
+
+        .gift-text {
+            font-size: 2rem;
+            color: #8a2be2;
+            margin-top: 10px;
+            animation: fadeIn 4s ease-in-out;
+        }
+
+        .messages {
+            margin-top: 40px;
+            max-width: 80%;
+            overflow: hidden;
+            height: 200px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #4b0082;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            display: none;
+            transition: opacity 1s ease-in-out;
+        }
+
+        @media (max-width: 600px) {
+            .queen-text {
+                font-size: 4rem;
+            }
+            .hon-text {
+                font-size: 1.5rem;
+            }
+            .gift-text {
+                font-size: 1.5rem;
+            }
+            .message {
+                font-size: 1rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+    </style>
+    <script>
+        let backgroundColors = ['#f0f8ff', '#ffe4e1', '#e6e6fa', '#f5fffa', '#fff0f5'];
+        let currentMessageIndex = 0;
+
+        const messages = [
+            "💖 Happy Birthday, Mom! You're the best gift in my life! 🎂",
+            "🌹 Wishing you a day as beautiful and special as you are! 🎉",
+            "🥰 May this year bring you all the happiness you deserve! 🎁",
+            "💐 To the most wonderful mom, happy birthday! 🌟",
+            "🎶 Thanks for always being there. Happy birthday, Mom! 🎤",
+            "🎂 To the woman who taught me everything, enjoy your day! 🌷",
+            "🌸 Your love means the world to me. Have the best birthday! 🎉",
+            "💖 To my queen, happy birthday! You are forever cherished. 👑",
+            "🎈 Mom, you are a treasure! Wishing you endless joy today and always. 🥳",
+            "💫 Thanks for always supporting me, Mom. Have an amazing birthday! 🎉",
+            "🌼 You're the heart of our family. Happy birthday, dear Mom! 🎂",
+            "🌷 Mom, your kindness and love are unmatched. Happy birthday! 💖",
+            "🎁 On your birthday, I want to send you all my love and gratitude. 🌟",
+            "💝 May your heart be filled with joy, Mom. Happy birthday! 🥳",
+            "🎉 Every year you get even more fabulous. Enjoy your special day, Mom! 🎂",
+            "🌹 Your love shines brighter than the stars. Happy birthday, Mom! ✨",
+            "🎂 You’re the reason I smile every day. Enjoy your birthday, Mom! 💖",
+            "🌟 I love you to the moon and back, Mom. Have a fantastic birthday! 💖",
+            "🎈 Happy birthday to the most amazing and beautiful mom ever! 🥰",
+            "💐 Wishing you endless happiness on your special day! 🎉",
+            "🎶 Your heart is filled with so much love. May this birthday be as beautiful as you are! 💖",
+            "🎉 Cheers to the best mom in the world! May your birthday be filled with laughter! 🎂",
+            "🌸 To my beautiful mom, happy birthday! May all your dreams come true today. ✨",
+            "💖 Wishing the most amazing mom the happiest birthday today and always. 🎁",
+            "🎈 Every birthday with you is a blessing. I love you so much, Mom! 💖",
+            "💐 You make everything brighter just by being you. Happy birthday, Mom! 🌸",
+            "🌼 To the woman who gave me everything, have the best birthday! 🎉",
+            "🥳 You are my everything, Mom. Enjoy your day to the fullest! 💖",
+            "🎂 You’re more than a mom to me, you’re my best friend. Have a great birthday! 🥰",
+            "💝 Happy birthday to the most selfless, loving, and inspiring woman. Love you! 🌟",
+            "🌷 May your heart be filled with joy today and always, Mom! 🎉",
+            "🌟 Happy birthday to my role model and first love. I’m so grateful for you, Mom! 💖",
+            "🎈 To the woman who gave me everything, you deserve the best birthday! 🌹",
+            "🎉 I’m so blessed to have you as my mom. Happy birthday, Queen! 👑",
+            "💖 You are the light in my life. Wishing you the best birthday ever! 🎂",
+            "🎁 On your special day, I wish you nothing but happiness and love. 💖",
+            "🌸 Wishing you a fabulous birthday filled with love, joy, and laughter! 🥳",
+            "🎂 Happy birthday to the best chef, teacher, and mom! Enjoy your day! 🌼",
+            "🎉 To the most amazing woman, have a birthday as beautiful as you are! 🌟",
+            "🌷 You're the best mom in the world. Wishing you endless happiness today! 💖",
+            "💐 Wishing the queen of my heart the happiest of birthdays! 👑",
+            "🌸 To the most selfless, loving, and caring mom. Happy birthday! 🎉",
+            "🎁 You made me who I am today, Mom. I love you with all my heart. 💖",
+            "💝 Every year, you grow more fabulous. Happy birthday, Mom! 🌟",
+            "🌹 To the best mom ever, may your birthday be filled with endless joy! 🎈",
+            "🎂 Your kindness and love mean the world to me. Happy birthday, Mom! 💖",
+            "🎶 Happy birthday to the most wonderful and loving mom in the world! 🎉",
+            "🌷 To my first and forever love, happy birthday, Mom! 💖",
+            "💐 Wishing you a birthday as amazing and beautiful as you, Mom! 🌸",
+            "🌟 Happy birthday, Queen Mom! You are truly one of a kind! 💖",
+            "🎁 Happy birthday to the woman who gave me everything, love you, Mom! 💖",
+            "🎉 To the woman who gave me life, I am forever grateful. Have a wonderful birthday! 🎂",
+            "🌸 May this year bring you joy and happiness, Mom! Happy birthday! 💖",
+            "🎈 Happy birthday to the person who means the world to me. I love you, Mom! 💖",
+            "🌹 Wishing you the best birthday, filled with love, happiness, and laughter! 🎉",
+            "🎂 Happy birthday to the one who makes all things better. Love you, Mom! 💐",
+            "🎉 Mom, you're amazing in every way. Have a fabulous birthday! 🌟",
+            "🌷 I hope your birthday is filled with as much love and joy as you give to everyone. 💖",
+            "🎁 Wishing you a year filled with happiness, love, and blessings, Mom! 💐",
+            "🎂 You deserve the world, Mom! Wishing you the happiest birthday! 💖",
+            "🎈 To the woman who loves unconditionally, Happy Birthday, Mom! 💖",
+            "🎉 Your love is my greatest treasure. Have a beautiful birthday, Mom! 💖",
+            "🎂 Happy birthday to my first teacher, best friend, and forever love! 💖",
+            "🎶 Wishing the most fabulous birthday to my best friend and Mom! 🎉",
+            "💐 May your birthday be as beautiful and unique as you, Mom! 🌷",
+            "🌟 Thank you for everything you do for me. Have the best birthday ever, Mom! 💖",
+            "🎁 I love you more than words can say. Have an unforgettable birthday, Mom! 💖",
+            "🌸 To the one who’s always there for me, have the happiest birthday ever! 🎉",
+            "🎂 Happy birthday to the most loving, caring, and fabulous mom! 🎉",
+            "🎈 Your love is my greatest gift. Happy birthday, Mom! 💖",
+            "🎉 Thank you for being the best mom ever! Happy birthday, Queen! 👑"
+        ];
+
+        function changeBackground() {
+            document.body.style.backgroundColor = backgroundColors[Math.floor(Math.random() * backgroundColors.length)];
+        }
+
+        function showNextMessage() {
+            const messageElements = document.querySelectorAll('.message');
+            messageElements.forEach(msg => msg.style.display = 'none');
+            currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+            messageElements[currentMessageIndex].style.display = 'block';
+        }
+
+        setInterval(changeBackground, 3000);  // Change background color every 3 seconds
+        setInterval(showNextMessage, 3000);  // Change quote every 3 seconds
+    </script>
+</head>
+<body>
+    <div class="queen-text">
+        Queen <span class="hon-text">Hon. Nyiramana Christine</span>
+    </div>
+    <div class="gift-text">A gift to my mom</div>
+
+    <div class="messages">
+        <div class="message" style="display:block;">💖 Happy Birthday, Mom! You're the best gift in my life! 🎂</div>
+        <div class="message">🌹 Wishing you a day as beautiful and special as you are! 🎉</div>
+        <div class="message">🥰 May this year bring you all the happiness you deserve! 🎁</div>
+        <div class="message">💐 To the most wonderful mom, happy birthday! 🌟</div>
+        <div class="message">🎶 Thanks for always being there. Happy birthday, Mom! 🎤</div>
+        <div class="message">🎂 To the woman who taught me everything, enjoy your day! 🌷</div>
+      </div> class="message">💖 Wishing the most amazing mom the happiest birthday today and always. 🎁</div>
+            <div class="message">🎈 Every birthday with you is a blessing. I love you so much, Mom! 💖</div>
+            <div class="message">💐 You make everything brighter just by being you. Happy birthday, Mom! 🌸</div>
+            <div class="message">🌼 To the woman who gave me everything, have the best birthday! 🎉</div>
+            <div class="message">🥳 You are my everything, Mom. Enjoy your day to the fullest! 💖</div>
+            <div class="message">🎂 You’re more than a mom to me, you’re my best friend. Have a great birthday! 🥰</div>
+            <div class="message">💝 Happy birthday to the most selfless, loving, and inspiring woman. Love you! 🌟</div>
+            <div class="message">🌷 May your heart be filled with joy today and always, Mom! 🎉</div>
+            <div class="message">🌟 Happy birthday to my role model and first love. I’m so grateful for you, Mom! 💖</div>
+            <div class="message">🎈 To the woman who gave me everything, you deserve the best birthday! 🌹</div>
+            <div class="message">🎉 I’m so blessed to have you as my mom. Happy birthday, Queen! 👑</div>
+            <div class="message">💖 You are the light in my life. Wishing you the best birthday ever! 🎂</div>
+            <div class="message">🎁 On your special day, I wish you nothing but happiness and love. 💖</div>
+            <div class="message">🌸 Wishing you a fabulous birthday filled with love, joy, and laughter! 🥳</div>
+            <div class="message">🎂 Happy birthday to the best chef, teacher, and mom! Enjoy your day! 🌼</div>
+            <div class="message">🎉 To the most amazing woman, have a birthday as beautiful as you are! 🌟</div>
+            <div class="message">🌷 You're the best mom in the world. Wishing you endless happiness today! 💖</div>
+            <div class="message">💐 Wishing the queen of my heart the happiest of birthdays! 👑</div>
+            <div class="message">🌸 To the most selfless, loving, and caring mom. Happy birthday! 🎉</div>
+            <div class="message">🎁 You made me who I am today, Mom. I love you with all my heart. 💖</div>
+            <div class="message">💝 Every year, you grow more fabulous. Happy birthday, Mom! 🌟</div>
+            <div class="message">🌹 To the best mom ever, may your birthday be filled with endless joy! 🎈</div>
+            <div class="message">🎂 Your kindness and love mean the world to me. Happy birthday, Mom! 💖</div>
+            <div class="message">🎶 Happy birthday to the most wonderful and loving mom in the world! 🎉</div>
+            <div class="message">🌷 To my first and forever love, happy birthday, Mom! 💖</div>
+            <div class="message">💐 Wishing you a birthday as amazing and beautiful as you, Mom! 🌸</div>
+            <div class="message">🌟 Happy birthday, Queen Mom! You are truly one of a kind! 💖</div>
+            <div class="message">🎁 Happy birthday to the woman who gave me everything, love you, Mom! 💖</div>
+            <div class="message">🎉 To the woman who gave me life, I am forever grateful. Have a wonderful birthday! 🎂</div>
+            <div class="message">🌸 May this year bring you joy and happiness, Mom! Happy birthday! 💖</div>
+            <div class="message">🎈 Happy birthday to the person who means the world to me. I love you, Mom! 💖</div>
+            <div class="message">🌹 Wishing you the best birthday, filled with love, happiness, and laughter! 🎉</div>
+            <div class="message">🎂 Happy birthday to the one who makes all things better. Love you, Mom! 💐</div>
+            <div class="message">🎉 Mom, you're amazing in every way. Have a fabulous birthday! 🌟</div>
+            <div class="message">🌷 I hope your birthday is filled with as much love and joy as you give to everyone. 💖</div>
+            <div class="message">🎁 Wishing you a year filled with happiness, love, and blessings, Mom! 💐</div>
+            <div class="message">🎂 You deserve the world, Mom! Wishing you the happiest birthday! 💖</div>
+            <div class="message">🎈 To the woman who loves unconditionally, Happy Birthday, Mom! 💖</div>
+            <div class="message">🎉 Your love is my greatest treasure. Have a beautiful birthday, Mom! 💖</div>
+            <div class="message">🎂 Happy birthday to my first teacher, best friend, and forever love! 💖</div>
+            <div class="message">🎶 Wishing the most fabulous birthday to my best friend and Mom! 🎉</div>
+            <div class="message">💐 May your birthday be as beautiful and unique as you, Mom! 🌷</div>
+            <div class="message">🌟 Thank you for everything you do for me. Have the best birthday ever, Mom! 💖</div>
+            <div class="message">🎁 I love you more than words can say. Have an unforgettable birthday, Mom! 💖</div>
+            <div class="message">🌸 To the one who’s always there for me, have the happiest birthday ever! 🎉</div>
+            <div class="message">🎂 Happy birthday to the most loving, caring, and fabulous mom! 🎉</div>
+            <div class="message">🎈 Your love is my greatest gift. Happy birthday, Mom! 💖</div>
+            <div class="message">🎉 Thank you for being the best mom ever! Happy birthday, Queen! 👑</div>
+    
+    </div>
+        </body>
+</html>
